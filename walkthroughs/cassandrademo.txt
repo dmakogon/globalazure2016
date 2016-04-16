@@ -1,0 +1,37 @@
+cassandra notes
+
+ssh -p 49517 dmakogon@polyglotmva.cloudapp.net
+
+describe keyspaces;
+
+CREATE KEYSPACE demo
+WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };
+
+use demo;
+
+create table testtable (
+	user_id text,
+	stamp timestamp,
+	rate int,
+	primary key (user_id, stamp));
+	
+);
+
+insert into testtable (user_id, stamp, rate)
+	values ('david', '2015-02-24 12:30:00',70);
+
+select stamp, rate from heartrate where user_id ='david'
+and stamp > '2015-02-24 12:30:01' and
+stamp < '2015-02-24 12:30:03'
+
+consistency quorum;
+
+create table daily_heartrate (
+	user_id text,
+	stamp timestamp,
+	rate int,
+	primary key (user_id, stamp));
+	
+);
+insert into daily_heartrate (user_id,date, stamp, rate)
+	values ('david','2015-05-24', '2015-02-24 12:30:00',70);
