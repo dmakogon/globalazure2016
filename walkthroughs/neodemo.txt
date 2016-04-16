@@ -1,4 +1,7 @@
 
+
+match (a:Actor)-[:ACTS_IN]->(m:Movie {title: "The Matrix"}) return a,m
+
 # find actors that have also directed
 match (m:Movie)<-[:ACTS_IN]-(a:Actor)-[:DIRECTED]->(d:Movie)
   return a.name as Actor, collect(distinct(m.title)) as ActedIn,collect(distinct(d.title)) as DirectedIn limit 2;
